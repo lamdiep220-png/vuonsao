@@ -24,12 +24,7 @@
       --font-body: 'Nunito', sans-serif;
     }
 
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-      -webkit-tap-highlight-color: transparent;
-    }
+    * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
 
     body {
       background-color: var(--bg-color);
@@ -41,77 +36,76 @@
       padding-bottom: 90px;
     }
 
-    /* Canvas vẽ hàng trăm ngôi sao lấp lánh phía sau */
     #starCanvas {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      z-index: 0;
-      pointer-events: none;
+      position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+      z-index: 0; pointer-events: none;
     }
 
     .container {
-      max-width: 1000px;
-      margin: 0 auto;
-      padding: 0 20px;
-      position: relative;
-      z-index: 2;
+      max-width: 1000px; margin: 0 auto; padding: 0 20px;
+      position: relative; z-index: 2;
     }
 
-    /* Header */
-    header {
-      text-align: center;
-      padding: 40px 0 25px;
-      position: relative;
+    /* Thanh điều khiển trên cùng */
+    .top-bar {
+      display: flex; justify-content: flex-end; padding-top: 15px;
     }
+
+    .admin-btn {
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px dashed var(--star-yellow);
+      color: var(--star-yellow);
+      padding: 6px 14px;
+      border-radius: 20px;
+      font-size: 0.9rem;
+      cursor: pointer;
+      font-family: var(--font-cute);
+      font-size: 1.15rem;
+    }
+
+    header { text-align: center; padding: 20px 0 25px; }
 
     h1 {
       font-family: var(--font-cute);
       font-size: 3.2rem;
       color: var(--star-yellow);
-      text-shadow: 0 0 15px rgba(255, 224, 130, 0.5), 0 0 30px rgba(255, 128, 171, 0.3);
-      line-height: 1.1;
-      margin-bottom: 8px;
+      text-shadow: 0 0 15px rgba(255, 224, 130, 0.5);
+      line-height: 1.1; margin-bottom: 8px;
     }
 
-    p.subtitle {
-      color: var(--text-muted);
-      font-size: 1.05rem;
-    }
+    p.subtitle { color: var(--text-muted); font-size: 1.05rem; }
 
-    /* Bộ lọc */
-    .filters {
-      display: flex;
-      justify-content: center;
-      gap: 10px;
-      margin: 25px 0 35px;
-      flex-wrap: wrap;
+    /* Bộ lọc & Nút Đăng bài */
+    .actions-bar {
+      display: flex; justify-content: center; align-items: center;
+      gap: 10px; margin: 20px 0 30px; flex-wrap: wrap;
     }
 
     .filter-btn {
       background: rgba(255, 255, 255, 0.05);
       border: 1px dashed var(--card-border);
       color: var(--text-muted);
-      padding: 8px 18px;
-      border-radius: 20px;
-      cursor: pointer;
-      font-family: var(--font-cute);
-      font-size: 1.25rem;
-      transition: all 0.25s ease;
-      backdrop-filter: blur(5px);
+      padding: 7px 16px; border-radius: 20px;
+      cursor: pointer; font-family: var(--font-cute);
+      font-size: 1.25rem; transition: all 0.25s ease;
     }
 
     .filter-btn:hover, .filter-btn.active {
       background: rgba(255, 224, 130, 0.18);
       color: var(--star-yellow);
       border-color: var(--star-yellow);
-      box-shadow: 0 0 14px rgba(255, 224, 130, 0.3);
-      transform: translateY(-2px);
     }
 
-    /* Lưới Card */
+    .btn-create-post {
+      background: linear-gradient(135deg, #ff80ab, #f06292);
+      color: #fff; border: none; padding: 7px 18px;
+      border-radius: 20px; font-family: var(--font-cute);
+      font-size: 1.3rem; font-weight: 700; cursor: pointer;
+      display: none; /* Chỉ hiện khi bật quyền quản trị */
+      box-shadow: 0 0 15px rgba(255, 128, 171, 0.4);
+    }
+
+    /* Grid cards */
     .grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
@@ -121,127 +115,71 @@
     .card {
       background: var(--card-bg);
       border: 1px solid var(--card-border);
-      border-radius: 18px;
-      padding: 22px;
+      border-radius: 18px; padding: 22px;
       backdrop-filter: blur(12px);
-      transition: all 0.3s ease;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
+      display: flex; flex-direction: column; justify-content: space-between;
       box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+      position: relative;
     }
 
-    .card:hover {
-      transform: translateY(-5px);
-      border-color: var(--star-cyan);
-      box-shadow: 0 10px 30px rgba(128, 216, 255, 0.2);
+    .card-top {
+      display: flex; justify-content: space-between; align-items: flex-start;
     }
 
     .card-tag {
-      font-family: var(--font-cute);
-      font-size: 1.15rem;
-      padding: 3px 12px;
-      border-radius: 10px;
-      display: inline-block;
-      margin-bottom: 12px;
-      width: fit-content;
+      font-family: var(--font-cute); font-size: 1.15rem;
+      padding: 3px 12px; border-radius: 10px;
+      display: inline-block; margin-bottom: 12px;
     }
 
     .tag-story {
       background: rgba(255, 128, 171, 0.15);
-      color: var(--star-pink);
-      border: 1px solid rgba(255, 128, 171, 0.3);
+      color: var(--star-pink); border: 1px solid rgba(255, 128, 171, 0.3);
     }
 
     .tag-bot {
       background: rgba(128, 216, 255, 0.15);
-      color: var(--star-cyan);
-      border: 1px solid rgba(128, 216, 255, 0.3);
+      color: var(--star-cyan); border: 1px solid rgba(128, 216, 255, 0.3);
     }
 
-    .card-title {
-      font-size: 1.25rem;
-      font-weight: 700;
-      color: #fff;
-      margin-bottom: 8px;
+    .btn-delete {
+      background: none; border: none; color: #ff5252;
+      font-size: 1.2rem; cursor: pointer; display: none;
     }
 
-    .card-desc {
-      color: var(--text-muted);
-      font-size: 0.95rem;
-      line-height: 1.5;
-      margin-bottom: 20px;
-    }
+    .card-title { font-size: 1.25rem; font-weight: 700; color: #fff; margin-bottom: 8px; }
+    .card-desc { color: var(--text-muted); font-size: 0.95rem; line-height: 1.5; margin-bottom: 20px; }
 
-    .card-actions {
-      display: flex;
-      gap: 10px;
-      align-items: center;
-    }
+    .card-actions { display: flex; gap: 10px; align-items: center; }
 
     .btn-link {
-      flex: 1;
-      text-align: center;
+      flex: 1; text-align: center;
       background: linear-gradient(135deg, #ffe082, #ffca28);
-      color: #161824;
-      font-weight: 800;
-      padding: 9px 12px;
-      border-radius: 10px;
-      text-decoration: none;
-      font-size: 0.95rem;
-      box-shadow: 0 0 10px rgba(255, 224, 130, 0.3);
+      color: #161824; font-weight: 800; padding: 9px 12px;
+      border-radius: 10px; text-decoration: none; font-size: 0.95rem;
     }
 
     .btn-comment {
       background: rgba(255, 255, 255, 0.08);
       border: 1px solid rgba(255, 255, 255, 0.15);
-      color: var(--text-main);
-      padding: 9px 14px;
-      border-radius: 10px;
-      cursor: pointer;
+      color: var(--text-main); padding: 9px 14px;
+      border-radius: 10px; cursor: pointer;
     }
 
-    /* =========================================================
-       ĐÀN BỤI THAN CHẠY LĂNG XĂNG (SUSUWATARI)
-       ========================================================= */
+    /* Đàn bụi than */
     .sprite {
-      position: fixed;
-      z-index: 10;
-      cursor: pointer;
-      user-select: none;
+      position: fixed; z-index: 10; cursor: pointer; user-select: none;
       filter: drop-shadow(0 0 6px rgba(0,0,0,0.8));
-      transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     }
+    .sprite:active { transform: scale(1.5) rotate(15deg) !important; }
 
-    .sprite:active {
-      transform: scale(1.5) rotate(15deg) !important; /* Bấm vào bé nhảy dựng lên */
-    }
-
-    /* Bé 1: Chạy lăng xăng ở đáy màn hình từ trái qua phải */
     .sprite-1 {
-      bottom: 12px;
-      left: -60px;
-      width: 48px;
-      height: 48px;
+      bottom: 12px; left: -60px; width: 48px; height: 48px;
       animation: runAcross 18s linear infinite, wobble 0.35s ease-in-out infinite alternate;
     }
-
-    /* Bé 2: Nhảy lò cò góc phải màn hình */
     .sprite-2 {
-      bottom: 25px;
-      right: 20px;
-      width: 44px;
-      height: 44px;
+      bottom: 25px; right: 20px; width: 44px; height: 44px;
       animation: hopAround 4s ease-in-out infinite alternate;
-    }
-
-    /* Bé 3: Nấp ló lấp ló ở mép trái */
-    .sprite-3 {
-      top: 35%;
-      left: 10px;
-      width: 38px;
-      height: 38px;
-      animation: peekFloat 5s ease-in-out infinite;
     }
 
     @keyframes runAcross {
@@ -251,134 +189,68 @@
       98% { transform: scaleX(-1); }
       100% { left: -60px; transform: scaleX(1); }
     }
-
     @keyframes wobble {
       0% { transform: translateY(0px) rotate(-6deg); }
       100% { transform: translateY(-7px) rotate(6deg); }
     }
-
     @keyframes hopAround {
       0%, 100% { transform: translate(0, 0); }
-      30% { transform: translate(-25px, -18px) rotate(-10deg); }
-      60% { transform: translate(-50px, 0px) rotate(10deg); }
-      80% { transform: translate(-10px, -25px) rotate(-5deg); }
+      50% { transform: translate(-30px, -20px) rotate(-10deg); }
     }
 
-    @keyframes peekFloat {
-      0%, 100% { transform: translateY(0) rotate(0deg); }
-      50% { transform: translateY(-16px) rotate(12deg); }
-    }
-
-    /* Modal Bình Luận */
+    /* Modals */
     .modal {
-      position: fixed;
-      top: 0; left: 0; width: 100vw; height: 100vh;
-      background: rgba(0, 0, 0, 0.75);
-      backdrop-filter: blur(6px);
-      display: none;
-      justify-content: center;
-      align-items: center;
-      z-index: 999;
-      padding: 16px;
+      position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+      background: rgba(0, 0, 0, 0.8); backdrop-filter: blur(8px);
+      display: none; justify-content: center; align-items: center;
+      z-index: 999; padding: 16px;
     }
-
     .modal.active { display: flex; }
 
     .modal-content {
-      background: #121422;
-      border: 1px solid var(--star-yellow);
-      border-radius: 20px;
-      width: 100%;
-      max-width: 500px;
-      padding: 24px;
-      box-shadow: 0 0 35px rgba(255, 224, 130, 0.25);
-      max-height: 85vh;
-      display: flex;
-      flex-direction: column;
+      background: #121422; border: 1px solid var(--star-yellow);
+      border-radius: 20px; width: 100%; max-width: 480px;
+      padding: 24px; box-shadow: 0 0 35px rgba(255, 224, 130, 0.25);
+      max-height: 90vh; overflow-y: auto;
     }
 
     .modal-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 15px;
+      display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;
     }
 
-    .modal-title {
-      font-family: var(--font-cute);
-      font-size: 1.7rem;
-      color: var(--star-yellow);
-    }
+    .modal-title { font-family: var(--font-cute); font-size: 1.8rem; color: var(--star-yellow); }
+    .close-btn { background: none; border: none; color: var(--text-muted); font-size: 1.8rem; cursor: pointer; }
 
-    .close-btn {
-      background: none; border: none;
-      color: var(--text-muted);
-      font-size: 1.8rem;
-      cursor: pointer;
+    .form-group { display: flex; flex-direction: column; gap: 6px; margin-bottom: 12px; }
+    .form-group label { font-size: 0.9rem; color: var(--star-cyan); }
+    .form-group input, .form-group textarea, .form-group select {
+      background: rgba(255, 255, 255, 0.08); border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 10px; padding: 11px; color: #fff; font-family: inherit; outline: none;
+    }
+    .form-group select option { background: #121422; color: #fff; }
+
+    .btn-submit {
+      width: 100%; background: var(--star-yellow); color: #12131c;
+      font-weight: 800; padding: 12px; border: none; border-radius: 10px;
+      cursor: pointer; font-family: var(--font-cute); font-size: 1.35rem; margin-top: 10px;
     }
 
     .comments-list {
-      flex: 1;
-      overflow-y: auto;
-      margin-bottom: 15px;
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-      max-height: 230px;
+      max-height: 220px; overflow-y: auto; margin-bottom: 15px;
+      display: flex; flex-direction: column; gap: 10px;
     }
-
     .comment-item {
-      background: rgba(255, 255, 255, 0.05);
-      padding: 10px 14px;
-      border-radius: 12px;
-      border-left: 3px solid var(--star-pink);
+      background: rgba(255, 255, 255, 0.05); padding: 10px 14px;
+      border-radius: 12px; border-left: 3px solid var(--star-pink);
     }
-
-    .comment-author {
-      font-weight: 700;
-      font-size: 0.9rem;
-      color: var(--star-green);
-      margin-bottom: 3px;
-    }
-
-    .comment-form {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-    }
-
-    .comment-form input, .comment-form textarea {
-      width: 100%;
-      background: rgba(255, 255, 255, 0.07);
-      border: 1px solid rgba(255, 255, 255, 0.15);
-      border-radius: 8px;
-      padding: 10px;
-      color: #fff;
-      font-family: inherit;
-      outline: none;
-    }
-
-    .btn-submit {
-      background: var(--star-yellow);
-      color: #12131c;
-      font-weight: 800;
-      padding: 10px;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-      font-family: var(--font-cute);
-      font-size: 1.3rem;
-    }
+    .comment-author { font-weight: 700; font-size: 0.9rem; color: var(--star-green); margin-bottom: 2px; }
   </style>
 </head>
 <body>
 
-  <!-- Nền canvas trời sao -->
   <canvas id="starCanvas"></canvas>
 
-  <!-- ĐÀN TIỂU TINH LINH BỤI THAN CHẠY LĂNG XĂNG -->
-  
-  <!-- Bé 1: Chạy lon ton dưới đáy, ôm kẹo sao hồng -->
+  <!-- Đàn bụi than lon ton -->
   <div class="sprite sprite-1" title="Chạm vào tớ đi!">
     <svg viewBox="0 0 100 100" fill="none">
       <path d="M50 5 L55 18 L68 10 L68 24 L82 22 L77 35 L90 40 L80 50 L92 60 L78 65 L84 78 L70 78 L68 92 L55 83 L50 95 L45 83 L32 92 L30 78 L16 78 L22 65 L8 60 L20 50 L10 40 L23 35 L18 22 L32 24 L32 10 L45 18 Z" fill="#11121a"/>
@@ -386,12 +258,10 @@
       <circle cx="40" cy="42" r="4.5" fill="#111"/>
       <ellipse cx="63" cy="42" rx="10" ry="12" fill="white"/>
       <circle cx="60" cy="42" r="4.5" fill="#111"/>
-      <!-- Kẹo sao hồng -->
       <polygon points="50,60 54,69 64,69 56,75 59,85 50,79 41,85 44,75 36,69 46,69" fill="#ff80ab"/>
     </svg>
   </div>
 
-  <!-- Bé 2: Nhảy nhót góc phải, ôm kẹo sao vàng -->
   <div class="sprite sprite-2" title="Chạm vào tớ đi!">
     <svg viewBox="0 0 100 100" fill="none">
       <path d="M50 5 L55 18 L68 10 L68 24 L82 22 L77 35 L90 40 L80 50 L92 60 L78 65 L84 78 L70 78 L68 92 L55 83 L50 95 L45 83 L32 92 L30 78 L16 78 L22 65 L8 60 L20 50 L10 40 L23 35 L18 22 L32 24 L32 10 L45 18 Z" fill="#141520"/>
@@ -399,41 +269,70 @@
       <circle cx="39" cy="39" r="4" fill="#111"/>
       <ellipse cx="64" cy="40" rx="9" ry="11" fill="white"/>
       <circle cx="67" cy="39" r="4" fill="#111"/>
-      <!-- Kẹo sao vàng lấp lánh -->
       <polygon points="50,62 54,71 64,71 56,77 59,87 50,81 41,87 44,77 36,71 46,71" fill="#ffe082"/>
     </svg>
   </div>
 
-  <!-- Bé 3: Lơ lửng mép trái, ôm kẹo sao xanh ngọc -->
-  <div class="sprite sprite-3" title="Chạm vào tớ đi!">
-    <svg viewBox="0 0 100 100" fill="none">
-      <path d="M50 5 L55 18 L68 10 L68 24 L82 22 L77 35 L90 40 L80 50 L92 60 L78 65 L84 78 L70 78 L68 92 L55 83 L50 95 L45 83 L32 92 L30 78 L16 78 L22 65 L8 60 L20 50 L10 40 L23 35 L18 22 L32 24 L32 10 L45 18 Z" fill="#12131d"/>
-      <ellipse cx="38" cy="44" rx="10" ry="12" fill="white"/>
-      <circle cx="38" cy="44" r="4.5" fill="#111"/>
-      <ellipse cx="62" cy="44" rx="10" ry="12" fill="white"/>
-      <circle cx="62" cy="44" r="4.5" fill="#111"/>
-      <!-- Kẹo sao xanh ngọc -->
-      <polygon points="50,60 54,69 64,69 56,75 59,85 50,79 41,85 44,75 36,69 46,69" fill="#a7ffeb"/>
-    </svg>
-  </div>
-
-  <!-- NỘI DUNG CHÍNH CỦA TRANG WEB -->
   <div class="container">
+    <!-- Nút quản trị ở góc phải -->
+    <div class="top-bar">
+      <button class="admin-btn" id="adminToggleBtn" onclick="toggleAdminPrompt()">🔑 Quản trị</button>
+    </div>
+
     <header>
       <h1>Vườn Sao & Tiểu Tinh Linh</h1>
-      <p class="subtitle">Nơi trú ẩn của những câu chuyện và các bé bot AI ✨</p>
-
-      <div class="filters">
-        <button class="filter-btn active" onclick="filterItems('all')">⭐ Tất cả</button>
-        <button class="filter-btn" onclick="filterItems('story')">📖 Truyện</button>
-        <button class="filter-btn" onclick="filterItems('bot')">🤖 Bot AI</button>
-      </div>
+      <p class="subtitle">Nơi lưu giữ các truyện tớ viết & các em Bot AI tớ tạo ra ✨</p>
     </header>
+
+    <div class="actions-bar">
+      <button class="filter-btn active" onclick="filterItems('all')">⭐ Tất cả</button>
+      <button class="filter-btn" onclick="filterItems('story')">📖 Truyện</button>
+      <button class="filter-btn" onclick="filterItems('bot')">🤖 Bot AI</button>
+      <!-- Nút đăng bài (chỉ mở khi đăng nhập quản trị) -->
+      <button class="btn-create-post" id="btnCreatePost" onclick="openCreateModal()">➕ Đăng bài mới</button>
+    </div>
 
     <div class="grid" id="cardGrid"></div>
   </div>
 
-  <!-- Hộp thoại bình luận -->
+  <!-- MODAL ĐĂNG BÀI MỚI -->
+  <div class="modal" id="createPostModal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 class="modal-title">✨ Thêm Link Mới</h3>
+        <button class="close-btn" onclick="closeCreateModal()">&times;</button>
+      </div>
+
+      <form onsubmit="handleCreatePost(event)">
+        <div class="form-group">
+          <label>Thể loại</label>
+          <select id="postType">
+            <option value="story">📖 Truyện</option>
+            <option value="bot">🤖 Bot AI</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label>Tiêu đề</label>
+          <input type="text" id="postTitle" placeholder="Ví dụ: Chuyến tàu đêm đầy sao..." required>
+        </div>
+
+        <div class="form-group">
+          <label>Đường link (URL)</label>
+          <input type="url" id="postLink" placeholder="https://wattpad.com/... hoặc link Bot" required>
+        </div>
+
+        <div class="form-group">
+          <label>Mô tả ngắn</label>
+          <textarea id="postDesc" rows="3" placeholder="Viết đôi dòng giới thiệu nội dung truyện hoặc bot..." required></textarea>
+        </div>
+
+        <button type="submit" class="btn-submit">Đăng lên Vườn Sao 🚀</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- MODAL BÌNH LUẬN -->
   <div class="modal" id="commentModal">
     <div class="modal-content">
       <div class="modal-header">
@@ -443,9 +342,13 @@
 
       <div class="comments-list" id="modalCommentsList"></div>
 
-      <form class="comment-form" onsubmit="handleSendComment(event)">
-        <input type="text" id="commentAuthor" placeholder="Tên hoặc biệt danh của cậu..." required>
-        <textarea id="commentBody" rows="3" placeholder="Gửi một ngôi sao hoặc lời nhắn..." required></textarea>
+      <form onsubmit="handleSendComment(event)">
+        <div class="form-group">
+          <input type="text" id="commentAuthor" placeholder="Tên hoặc biệt danh của cậu..." required>
+        </div>
+        <div class="form-group">
+          <textarea id="commentBody" rows="3" placeholder="Gửi một ngôi sao hoặc lời nhắn..." required></textarea>
+        </div>
         <button type="submit" class="btn-submit">Thả sao & Gửi ✨</button>
       </form>
     </div>
@@ -453,101 +356,13 @@
 
   <script>
     /* =========================================================
-       1. HIỆU ỨNG TRỜI ĐẦY SAO VÀ SAO BĂNG
+       1. MẬT KHẨU QUẢN TRỊ (Cậu có thể đổi pass tại đây)
        ========================================================= */
-    const canvas = document.getElementById('starCanvas');
-    const ctx = canvas.getContext('2d');
-    let stars = [];
-    let shootingStars = [];
+    const ADMIN_PASSWORD = "1234"; 
+    let isAdmin = false;
 
-    function resizeCanvas() {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
-      initStars();
-    }
-
-    const starColors = ['#ffffff', '#ffe082', '#ff80ab', '#80d8ff', '#a7ffeb'];
-
-    function initStars() {
-      stars = [];
-      const count = Math.floor((canvas.width * canvas.height) / 3500); // Rất nhiều sao!
-      for (let i = 0; i < count; i++) {
-        stars.push({
-          x: Math.random() * canvas.width,
-          y: Math.random() * canvas.height,
-          radius: Math.random() * 1.6 + 0.4,
-          color: starColors[Math.floor(Math.random() * starColors.length)],
-          alpha: Math.random(),
-          speed: Math.random() * 0.02 + 0.005
-        });
-      }
-    }
-
-    function addShootingStar() {
-      shootingStars.push({
-        x: Math.random() * canvas.width * 0.8,
-        y: Math.random() * canvas.height * 0.4,
-        len: Math.random() * 80 + 40,
-        speed: Math.random() * 8 + 6,
-        alpha: 1
-      });
-      // Khoảng 4-8 giây lại có 1 ngôi sao băng lướt qua
-      setTimeout(addShootingStar, Math.random() * 5000 + 3000);
-    }
-
-    function drawStars() {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-      // Vẽ sao nhấp nháy
-      stars.forEach(s => {
-        s.alpha += s.speed;
-        if (s.alpha > 1 || s.alpha < 0.1) s.speed = -s.speed;
-
-        ctx.save();
-        ctx.globalAlpha = Math.max(0, Math.min(1, s.alpha));
-        ctx.fillStyle = s.color;
-        ctx.shadowBlur = 6;
-        ctx.shadowColor = s.color;
-        ctx.beginPath();
-        ctx.arc(s.x, s.y, s.radius, 0, Math.PI * 2);
-        ctx.fill();
-        ctx.restore();
-      });
-
-      // Vẽ sao băng
-      for (let i = shootingStars.length - 1; i >= 0; i--) {
-        const ss = shootingStars[i];
-        ctx.save();
-        ctx.strokeStyle = '#ffe082';
-        ctx.lineWidth = 1.5;
-        ctx.globalAlpha = ss.alpha;
-        ctx.shadowBlur = 10;
-        ctx.shadowColor = '#ffe082';
-        ctx.beginPath();
-        ctx.moveTo(ss.x, ss.y);
-        ctx.lineTo(ss.x + ss.len, ss.y + ss.len * 0.6);
-        ctx.stroke();
-        ctx.restore();
-
-        ss.x += ss.speed;
-        ss.y += ss.speed * 0.6;
-        ss.alpha -= 0.025;
-
-        if (ss.alpha <= 0) shootingStars.splice(i, 1);
-      }
-
-      requestAnimationFrame(drawStars);
-    }
-
-    window.addEventListener('resize', resizeCanvas);
-    resizeCanvas();
-    addShootingStar();
-    drawStars();
-
-    /* =========================================================
-       2. DANH SÁCH BÀI ĐĂNG (TRUYỆN & BOT AI)
-       ========================================================= */
-    const myData = [
+    // Dữ liệu mặc định
+    const defaultData = [
       {
         id: 1,
         type: 'story',
@@ -561,38 +376,77 @@
         title: 'Em Bot Tâm Sự Đêm Khuya',
         desc: 'Bot AI được lập trình bằng Google AI Studio, chuyên lắng nghe tâm sự và phát kẹo sao an ủi.',
         link: 'https://gemini.google.com'
-      },
-      {
-        id: 3,
-        type: 'story',
-        title: 'Bí Mật Của Bụi Than Nhỏ',
-        desc: 'Mẩu truyện ngắn về cuộc phiêu lưu của các bé Susuwatari đi gom những mảnh kẹo sao rơi rụng.',
-        link: '#'
-      },
-      {
-        id: 4,
-        type: 'bot',
-        title: 'Trợ Lý Sáng Tạo Cốt Truyện',
-        desc: 'AI hỗ trợ lên ý tưởng thế giới fantasy, tính cách nhân vật cho các tác giả viết truyện.',
-        link: '#'
       }
     ];
 
+    function getStoredPosts() {
+      const saved = localStorage.getItem('starry_hub_posts');
+      return saved ? JSON.parse(saved) : defaultData;
+    }
+
+    function savePosts(posts) {
+      localStorage.setItem('starry_hub_posts', JSON.stringify(posts));
+    }
+
+    let myData = getStoredPosts();
     let currentFilter = 'all';
     let currentPostId = null;
 
-    function getStoredComments() {
-      const saved = localStorage.getItem('starry_hub_comments');
-      return saved ? JSON.parse(saved) : {
-        1: [{ author: 'Khách Qua Đường', text: 'Giao diện nhiều sao lung linh quá tác giả ơi!' }],
-        2: [{ author: 'Mọt Sách', text: 'Mấy bé bụi than chạy cưng xỉu luôn á ❤️' }]
+    // Quản trị viên
+    function toggleAdminPrompt() {
+      if (!isAdmin) {
+        const pass = prompt("Nhập mật khẩu quản trị của cậu nha (Mặc định: 1234):");
+        if (pass === ADMIN_PASSWORD) {
+          isAdmin = true;
+          document.getElementById('adminToggleBtn').innerText = "🔓 Thoát Quản Trị";
+          document.getElementById('btnCreatePost').style.display = "inline-block";
+          alert("Chào mừng chủ nhân khu vườn! Cậu đã có thể đăng bài và xóa bài rồi nha ✨");
+          renderCards();
+        } else if (pass !== null) {
+          alert("Sai mật khẩu rồi nè!");
+        }
+      } else {
+        isAdmin = false;
+        document.getElementById('adminToggleBtn').innerText = "🔑 Quản trị";
+        document.getElementById('btnCreatePost').style.display = "none";
+        renderCards();
+      }
+    }
+
+    function openCreateModal() { document.getElementById('createPostModal').classList.add('active'); }
+    function closeCreateModal() { document.getElementById('createPostModal').classList.remove('active'); }
+
+    // Xử lý đăng bài mới
+    function handleCreatePost(e) {
+      e.preventDefault();
+      const newPost = {
+        id: Date.now(),
+        type: document.getElementById('postType').value,
+        title: document.getElementById('postTitle').value.trim(),
+        link: document.getElementById('postLink').value.trim(),
+        desc: document.getElementById('postDesc').value.trim()
       };
+
+      myData.unshift(newPost);
+      savePosts(myData);
+
+      // Đóng modal & reset form
+      closeCreateModal();
+      e.target.reset();
+      renderCards();
+      alert("Đăng bài thành công rồi nha! ✨");
     }
 
-    function saveComments(comments) {
-      localStorage.setItem('starry_hub_comments', JSON.stringify(comments));
+    // Xử lý xóa bài
+    function deletePost(id) {
+      if (confirm("Cậu có chắc muốn xóa bài này không?")) {
+        myData = myData.filter(p => p.id !== id);
+        savePosts(myData);
+        renderCards();
+      }
     }
 
+    // Hiển thị cards
     function renderCards() {
       const grid = document.getElementById('cardGrid');
       grid.innerHTML = '';
@@ -605,12 +459,16 @@
         const tagText = item.type === 'story' ? '📖 Truyện' : '🤖 Bot AI';
         const tagClass = item.type === 'story' ? 'tag-story' : 'tag-bot';
         const buttonText = item.type === 'story' ? 'Đọc truyện ↗' : 'Trò chuyện ↗';
+        const deleteBtnDisplay = isAdmin ? 'inline-block' : 'none';
 
         const card = document.createElement('div');
         card.className = 'card';
         card.innerHTML = `
           <div>
-            <span class="card-tag ${tagClass}">${tagText}</span>
+            <div class="card-top">
+              <span class="card-tag ${tagClass}">${tagText}</span>
+              <button class="btn-delete" style="display: ${deleteBtnDisplay}" onclick="deletePost(${item.id})">🗑️</button>
+            </div>
             <h2 class="card-title">${item.title}</h2>
             <p class="card-desc">${item.desc}</p>
           </div>
@@ -630,10 +488,20 @@
       renderCards();
     }
 
+    // Bình luận
+    function getStoredComments() {
+      const saved = localStorage.getItem('starry_hub_comments');
+      return saved ? JSON.parse(saved) : {};
+    }
+
+    function saveComments(comments) {
+      localStorage.setItem('starry_hub_comments', JSON.stringify(comments));
+    }
+
     function openComments(id) {
       currentPostId = id;
       const post = myData.find(p => p.id === id);
-      document.getElementById('modalPostTitle').innerText = `Góc trò chuyện: ${post.title}`;
+      document.getElementById('modalPostTitle').innerText = `Góc trò chuyện: ${post ? post.title : ''}`;
       loadCommentsUI();
       document.getElementById('commentModal').classList.add('active');
     }
@@ -649,7 +517,7 @@
       const comments = getStoredComments()[currentPostId] || [];
 
       if (comments.length === 0) {
-        listEl.innerHTML = '<p style="color: var(--text-muted); text-align: center; margin-top: 20px;">Chưa có bình luận nào. Hãy thả ngôi sao đầu tiên nhé! ✨</p>';
+        listEl.innerHTML = '<p style="color: var(--text-muted); text-align: center; margin-top: 15px;">Chưa có bình luận nào. Hãy thả ngôi sao đầu tiên nhé! ✨</p>';
         return;
       }
 
@@ -666,12 +534,8 @@
 
     function handleSendComment(e) {
       e.preventDefault();
-      const authorInput = document.getElementById('commentAuthor');
-      const bodyInput = document.getElementById('commentBody');
-
-      const author = authorInput.value.trim();
-      const text = bodyInput.value.trim();
-
+      const author = document.getElementById('commentAuthor').value.trim();
+      const text = document.getElementById('commentBody').value.trim();
       if (!author || !text) return;
 
       const allComments = getStoredComments();
@@ -680,13 +544,55 @@
       allComments[currentPostId].push({ author, text });
       saveComments(allComments);
 
-      authorInput.value = '';
-      bodyInput.value = '';
+      document.getElementById('commentAuthor').value = '';
+      document.getElementById('commentBody').value = '';
       loadCommentsUI();
       renderCards();
     }
 
+    // Hiệu ứng trời sao
+    const canvas = document.getElementById('starCanvas');
+    const ctx = canvas.getContext('2d');
+    let stars = [];
+
+    function resizeCanvas() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+      stars = [];
+      const count = Math.floor((canvas.width * canvas.height) / 3500);
+      const starColors = ['#ffffff', '#ffe082', '#ff80ab', '#80d8ff', '#a7ffeb'];
+      for (let i = 0; i < count; i++) {
+        stars.push({
+          x: Math.random() * canvas.width,
+          y: Math.random() * canvas.height,
+          radius: Math.random() * 1.5 + 0.4,
+          color: starColors[Math.floor(Math.random() * starColors.length)],
+          alpha: Math.random(),
+          speed: Math.random() * 0.02 + 0.005
+        });
+      }
+    }
+
+    function drawStars() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      stars.forEach(s => {
+        s.alpha += s.speed;
+        if (s.alpha > 1 || s.alpha < 0.1) s.speed = -s.speed;
+        ctx.save();
+        ctx.globalAlpha = Math.max(0, Math.min(1, s.alpha));
+        ctx.fillStyle = s.color;
+        ctx.beginPath();
+        ctx.arc(s.x, s.y, s.radius, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.restore();
+      });
+      requestAnimationFrame(drawStars);
+    }
+
+    window.addEventListener('resize', resizeCanvas);
+    resizeCanvas();
+    drawStars();
     renderCards();
   </script>
 </body>
-  </html>
+</html>
